@@ -7,7 +7,6 @@ function bubleSort(arr) {
     isSwapped = false;
     for (let j = 0; j < arr.length; j++) {
       if (arr[j] > arr[j + 1]) {
-        console.log("here");
         swap(arr, j, j + 1);
         isSwapped = true;
       }
