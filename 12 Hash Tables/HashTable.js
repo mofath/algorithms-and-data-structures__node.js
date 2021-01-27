@@ -1,5 +1,5 @@
 class HashTable {
-  constructor(size = 53) {
+  constructor(size = 17) {
     this._keyMap = new Array(size);
   }
 
@@ -29,6 +29,32 @@ class HashTable {
       return this._keyMap[index];
     }
     return undefined;
+  }
+
+  values() {
+    let valuesArr = [];
+    for (let i = 0; i < this._keyMap.length; i++) {
+      if (this._keyMap[i]) {
+        for (let j = [0]; j < this._keyMap[i].length; j++) {
+          if (!valuesArr.includes(this._keyMap[i][j][1]))
+            valuesArr.push(this._keyMap[i][j][1]);
+        }
+      }
+    }
+    return valuesArr;
+  }
+
+  keys() {
+    let keysArr = [];
+    for (let i = 0; i < this._keyMap.length; i++) {
+      if (this._keyMap[i]) {
+        for (let j = [0]; j < this._keyMap[i].length; j++) {
+          if (!keysArr.includes(this._keyMap[i][j][0]))
+            keysArr.push(this._keyMap[i][j][0]);
+        }
+      }
+    }
+    return keysArr;
   }
 }
 
