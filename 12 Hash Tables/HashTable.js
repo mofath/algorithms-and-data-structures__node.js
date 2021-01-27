@@ -4,13 +4,32 @@ class HashTable {
   }
 
   _hash(key) {
-    let total = 0;
+    let index = 0;
     let RANDOM_PRIME = 31;
     for (let i = 0; i < Math.min(key.length, 100); i++) {
       let value = key[i].charCodeAt(0) - 96;
-      total = (total * RANDOM_PRIME + value) % this._keyMap.length;
+      index = (index * RANDOM_PRIME + value) % this._keyMap.length;
     }
-    return total;
+    return index;
+  }
+
+  set(key, value) {
+    let index = this._hash(key);
+    if (!this._keyMap[index]) this._keyMap[index] = [];
+    this._keyMap[index].push([key, value]);
+    return index;
+  }
+
+  get(key) {
+    let index = this._hash(key);
+    if (this._keyMap[index]) {
+      for (let i = 0; i < this._keyMap[index].length; i++) {
+        if (this._keyMap[index][i][0] === key) return this._keyMap[index][i][1];
+      }
+      return this._keyMap[index];
+    }
+    return undefined;
   }
 }
 
+module.exports = HashTable;
