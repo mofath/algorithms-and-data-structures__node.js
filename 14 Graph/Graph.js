@@ -66,6 +66,28 @@ class Graph {
 
     return result;
   }
+
+  BFS(start) {
+    const queue = [start];
+    const result = [];
+    const visited = {};
+    let currVertex;
+
+    visited[start] = true;
+
+    while (queue.length) {
+      currVertex = queue.shift();
+      result.push(currVertex);
+
+      this.adjacencyList[currVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          queue.push(neighbor);
+        }
+      });
+    }
+    return result;
+  }
 }
 
 let g = new Graph();
@@ -89,6 +111,7 @@ g.DFSRecursive('A');
 
 console.log(g.DFSRecursive('A'));
 console.log(g.DFSIterative('A'));
+console.log(g.BFS('A'));
 
 //          A
 //        /   \
